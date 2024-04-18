@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register membre Famille{% endblock %}
+
+{% block stylesheets %}
+    <link rel='stylesheet' href="{{ asset('assets/styles/app.css') }}">
+    <style>
+        body {
+            background-color: #f9f9f9; /* Couleur de fond claire */
+            font-family: Arial, sans-serif; /* Police par défaut */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            max-width: 500px;
+            width: 90%;
+            padding: 20px;
+            background-color: #D6FCFC; /* Couleur de fond blanche */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #46599C; /* Couleur du titre */
+        }
+        .form-container .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #46599C; /* Couleur du bouton */
+            color: #fff; /* Couleur du texte du bouton */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container .btn:hover {
+            background-color: #344267; /* Couleur du bouton au survol */
+        }
+        .form-container .btn:focus {
+            outline: none; /* Supprime le contour du bouton au focus */
+        }
+        .form-container .form-group {
+            margin-bottom: 20px;
+        }
+        .form-container .form-group label {
+            font-weight: bold;
+            color: #333; /* Couleur des labels */
+        }
+        .form-container .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc; /* Bordure légère */
+            box-sizing: border-box; /* Respecte la taille totale */
+        }
+        .form-container .form-control:focus {
+            outline: none; /* Supprime le contour de la zone de saisie au focus */
+            border-color: #46599C; /* Couleur de la bordure au focus */
+        }
+        .form-container .form-control.error {
+            border-color: red; /* Couleur de la bordure en cas d'erreur */
+        }
+        .form-container .form-error {
+            color: red; /* Couleur du texte d'erreur */
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .form-container .checkbox-label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="form-container">
+            <h1>Inscription des membres de famille</h1>
+
+            {{ form_errors(registrationMFamilleForm) }}
+
+            {{ form_start(registrationMFamilleForm) }}
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.firstName) }}
+                    {{ form_widget(registrationMFamilleForm.firstName, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.lastName) }}
+                    {{ form_widget(registrationMFamilleForm.lastName, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.telephone) }}
+                    {{ form_widget(registrationMFamilleForm.telephone, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.numPassport) }}
+                    {{ form_widget(registrationMFamilleForm.numPassport, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.address) }}
+                    {{ form_widget(registrationMFamilleForm.address, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.zipCode) }}
+                    {{ form_widget(registrationMFamilleForm.zipCode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.city) }}
+                    {{ form_widget(registrationMFamilleForm.city, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.email) }}
+                    {{ form_widget(registrationMFamilleForm.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.plainPassword, 'Password') }}
+                    {{ form_widget(registrationMFamilleForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registrationMFamilleForm.agreeTerms) }}
+                    {{ form_widget(registrationMFamilleForm.agreeTerms, {'label_attr': {'class': 'checkbox-label'}}) }}
+                </div>
+
+                <button type="submit" class="btn">S'inscrire</button>
+            {{ form_end(registrationMFamilleForm) }}
+        </div>
+    </div>
+{% endblock %}

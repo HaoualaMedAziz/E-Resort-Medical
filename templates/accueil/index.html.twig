@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block stylesheets %}
+    <link rel='stylesheet' href="{{ asset('assets/styles/app.css') }}">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .example-wrapper {
+            border-radius: 8%;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+            text-align: center;
+            border: 1px solid #ccc; /* Bordure de couleur claire */
+            padding: 20px; /* Ajoute de l'espace à l'intérieur du cadre */
+            background-color: #D6FCFC; /* Couleur de fond claire */
+        }
+        .logo-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .logo-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden; /* Pour s'assurer que l'image reste dans le cercle */
+        }
+        .container .container-inner {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .container .container-inner h4 {
+            color: #46599C; /* Couleur du texte */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="example-wrapper">
+            <h1 style="color:#46599C">Bienvenue sur E-Resort Medical</h1>
+            <h5 style="color:#46599C">Vous êtes :</h5>
+            <div class="logo-container">
+                <div class="container-inner">
+                    <img src="{{ asset('media/logoInfirmier.png') }}" alt="logoInfirmier">
+                    <h4>Infirmier</h4>
+                </div>
+                <div class="container-inner">
+                    <img src="{{ asset('media/logoMemFamille.png') }}" alt="logoMemFamille">
+                    <a href="{{ path('app_register_mFamille') }}"><h4>Membre de famille</h4></a>
+                </div>
+                <div class="container-inner">
+                    <img src="{{ asset('media/logoPersAgé.png') }}" alt="logoPersAgé">
+                    <a href="{{ path('app_register_resident') }}"><h4>Résident</h4></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block stylesheets %}
+    <link rel='stylesheet' href="{{ asset('assets/styles/app.css') }}">
+    <style>
+        body {
+            background-color: #f9f9f9; /* Couleur de fond claire */
+            font-family: Arial, sans-serif; /* Police par défaut */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+        .form-container {
+            max-width: 400px;
+            width: 90%;
+            padding: 20px;
+            background-color: #D6FCFC; /* Couleur de fond blanche */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #46599C; /* Couleur du titre */
+        }
+        .form-container .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc; /* Bordure légère */
+            box-sizing: border-box; /* Respecte la taille totale */
+            margin-bottom: 10px;
+        }
+        .form-container .checkbox-label {
+            display: block;
+            margin-top: 10px;
+        }
+        .form-container .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #46599C; /* Couleur du bouton */
+            color: #fff; /* Couleur du texte du bouton */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container .btn:hover {
+            background-color: #344267; /* Couleur du bouton au survol */
+        }
+        .form-container .btn:focus {
+            outline: none; /* Supprime le contour du bouton au focus */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="form-container">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous étes déja connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Connexion
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

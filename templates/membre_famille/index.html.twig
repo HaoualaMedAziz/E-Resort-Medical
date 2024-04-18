@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MembreFamille index{% endblock %}
+
+{% block body %}
+    <h1>MembreFamille index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Telephone</th>
+                <th>Address</th>
+                <th>ZipCode</th>
+                <th>City</th>
+                <th>NumPassport</th>
+                <th>Résident</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membre_famille in membre_familles %}
+            <tr>
+                <td>{{ membre_famille.id }}</td>
+                <td>{{ membre_famille.email }}</td>
+                <td>{{ membre_famille.roles ? membre_famille.roles|json_encode : '' }}</td>
+                <td>{{ membre_famille.password }}</td>
+                <td>{{ membre_famille.firstName }}</td>
+                <td>{{ membre_famille.lastName }}</td>
+                <td>{{ membre_famille.telephone }}</td>
+                <td>{{ membre_famille.address }}</td>
+                <td>{{ membre_famille.zipCode }}</td>
+                <td>{{ membre_famille.city }}</td>
+                <td>{{ membre_famille.numPassport }}</td>
+                <td>{{ membre_famille.resident.id }}</td>
+                <td>
+                    <a href="{{ path('app_membre_famille_show', {'id': membre_famille.id}) }}">show</a>
+                    <a href="{{ path('app_membre_famille_edit', {'id': membre_famille.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_membre_famille_new') }}">Create new</a>
+{% endblock %}
