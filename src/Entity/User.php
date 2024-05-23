@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\InheritanceType("JOINED")]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[ORM\DiscriminatorColumn(name:'discr',type:'string')]
-#[ORM\DiscriminatorMap(['user'=>User::class, 'resident'=>Resident::class, 'membreFamille'=>MembreFamille::class])]
+#[ORM\DiscriminatorMap(['user'=>User::class, 'resident'=>Resident::class, 'membreFamille'=>MembreFamille::class, 'infirmier'=>Infirmier::class, 'soignant'=>Soignant::class,])]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -55,13 +55,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-  
-
-
-
-   
-
     
+    //public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_RESIDENT = 'RESIDENT';
+
+    public const ROLE_MFAMILLE = 'MFAMILLE';
+    
+    public const ROLE_INFIRMIER = 'INFIRMIER';
+
+    public const ROLE_SOIGNANT = 'SOIGNANT';
 
     //#[ORM\Column(type: 'boolean')]
    // private $isVerified = false;
@@ -102,7 +104,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        //$roles[] = 'ROLE_USER';
+
+         // Ajouter le rôle "ROLE_USER" si ce n'est pas déjà fait
+        //if (!in_array(self::ROLE_USER, $roles)) {
+        //    $roles[] = self::ROLE_USER;
+        //}
+
+        // Ajouter le rôle "ROLE_RESIDENT" si l'entité est de type Resident
+        if ($this instanceof Resident && !in_array(self::ROLE_RESIDENT, $roles)) {
+            $roles[] = self::ROLE_RESIDENT;
+        }
+        if ($this instanceof MembreFamille && !in_array(self::ROLE_MFAMILLE, $roles)) {
+            $roles[] = self::ROLE_MFAMILLE;
+        }
+        if ($this instanceof Infirmier && !in_array(self::ROLE_INFIRMIER, $roles)) {
+            $roles[] = self::ROLE_INFIRMIER;
+        }
+        if ($this instanceof Soignant && !in_array(self::ROLE_SOIGNANT, $roles)) {
+            $roles[] = self::ROLE_SOIGNANT;
+        }
 
         return array_unique($roles);
     }
@@ -116,9 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
-
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -214,14 +232,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function __toString()
     {
         return $this->firstName;
     }
-   
-
-     
-
 
    // public function isVerified(): bool
    // {

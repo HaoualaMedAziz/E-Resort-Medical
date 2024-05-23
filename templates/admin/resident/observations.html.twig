@@ -1,0 +1,12 @@
+{# templates/path/to/your/custom/template.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Liste des Observations</h1>
+
+    <ul>
+        {% for observation in resident.observations %}
+            <li>{{ observation.id }} - {{ observation.someField }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -8,8 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-
+use Symfony\Component\Form\Extension\Core\Type\{PasswordType, RepeatedType};
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 
 class MembreFamilleCrudController extends AbstractCrudController
@@ -24,7 +24,18 @@ class MembreFamilleCrudController extends AbstractCrudController
 {
     return [
         TextField::new('email')->setLabel('Adresse email'),
-        TextField::new('password')->setLabel('Mot de passe'),
+        TextField::new('password')
+            ->setFormType(RepeatedType::class)
+            ->setFormTypeOptions([
+            'type' => PasswordType::class,
+            'first_options' => [
+            'label' => 'Password',
+            'hash_property_path' => 'password',
+             ],
+            'second_options' => ['label' => '(Repeat)'],
+            'mapped' => false,
+            ])
+            ->setRequired($pageName === Crud::PAGE_NEW),
         TextField::new('lastName')->setLabel('Nom de famille'),
         TextField::new('firstName')->setLabel('Prénom'),
         TextField::new('Telephone')->setLabel('Téléphone'),

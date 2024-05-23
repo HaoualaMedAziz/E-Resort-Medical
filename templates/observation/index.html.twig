@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des observations{% endblock %}
+
+
+
+{% block body %}
+
+   <div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->
+        <h1 class="mt-4 mb-4">Liste des observations</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tr>
+                {#<th scope="col">Id</th>#}
+                <th scope="col">Résident</th>
+                <th scope="col">Description</th>
+                <th scope="col">CreatedAt</th>
+                <th scope="col">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for observation in observations %}
+            <tr>
+                {#<td>{{ observation.id }}</td>#}
+                <td>{{ observation.resident.lastName }} {{ observation.resident.firstName }}</td>
+                <td>{{ observation.description }}</td>
+                <td>{{ observation.createdAt ? observation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_observation_show', {'id': observation.id}) }}" class="btn btn-primary ">Afficher</a>
+                    <a href="{{ path('app_observation_edit', {'id': observation.id}) }}" class="btn btn-info ">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_observation_new') }}"  class="btn btn-success btn-lg mt-3">Ajouter une observation</a>
+{% endblock %}

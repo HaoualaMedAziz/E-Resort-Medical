@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 
 class MembreFamilleType extends AbstractType
 {
@@ -15,8 +17,11 @@ class MembreFamilleType extends AbstractType
     {
         $builder
             ->add('email')
-            //->add('roles')
-            ->add('password')
+            //->add('password')
+            ->add('password', PasswordType::class, [
+            'hash_property_path' => 'password',
+            'mapped' => false,
+            ])
             ->add('firstName')
             ->add('lastName')
             ->add('telephone')
@@ -26,7 +31,9 @@ class MembreFamilleType extends AbstractType
             ->add('numPassport')
             ->add('resident', EntityType::class, [
                 'class' => Resident::class,
-                'choice_label' => 'id',
+                'choice_label' => function ($resident) {
+                return $resident->getLastName() . ' ' . $resident->getFirstName();
+                },
             ])
         ;
     }

@@ -15,7 +15,8 @@ class MembreFamille extends User
     private ?string $numPassport = null;
 
     #[ORM\OneToOne(inversedBy: 'membreFamille')]
-    #[ORM\JoinColumn(nullable: false)]
+    //nullable was false
+    #[ORM\JoinColumn(nullable: true)]
     private ?Resident $resident = null;
 
     #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'membreFamille')]

@@ -46,7 +46,7 @@
             outline: none; /* Supprime le contour du bouton au focus */
         }
         .form-container .form-group {
-            margin-bottom: 20px;
+            margin-bottom: px;
         }
         .form-container .form-group label {
             font-weight: bold;
@@ -79,8 +79,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container">   
         <div class="form-container">
+        <div style="text-align: center; margin-top: 10px; color:#46599C">
+            <h4 style="display: inline-block;">Vous avez déjà un compte? </h4>
+            <a href="{{ path('app_login') }}" style="display: inline-block;"><h4 style="display: inline-block; margin-left: 5px;color:#46599C;text-decoration: underline;">Se connecter</h4></a>
+        </div>
             <h1>Inscription des membres de famille</h1>
 
             {{ form_errors(registrationMFamilleForm) }}

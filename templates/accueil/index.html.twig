@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
     <link rel='stylesheet' href="{{ asset('assets/styles/app.css') }}">
@@ -14,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            height: 50%;
         }
         .example-wrapper {
             border-radius: 8%;
@@ -50,21 +50,37 @@
 {% block body %}
     <div class="container">
         <div class="example-wrapper">
+        {% if app.user %}
+           <p style="color:red">Vous étes connecté en tantque   {{ app.user.email }}! 
+           <a href="{{ path('app_logout') }}" class="logout-link">Déconnexion</a></p>
+        {% endif %}
+            {#<a href="{{ path('app_login') }}" class="login-link">Connexion</a>#}
             <h1 style="color:#46599C">Bienvenue sur E-Resort Medical</h1>
             <h5 style="color:#46599C">Vous êtes :</h5>
+            
             <div class="logo-container">
                 <div class="container-inner">
                     <img src="{{ asset('media/logoInfirmier.png') }}" alt="logoInfirmier">
-                    <h4>Infirmier</h4>
+                    <a href="{{ path('app_login') }}"><h4>Aide-Soignant(e)</h4></a>
                 </div>
+                
                 <div class="container-inner">
-                    <img src="{{ asset('media/logoMemFamille.png') }}" alt="logoMemFamille">
-                    <a href="{{ path('app_register_mFamille') }}"><h4>Membre de famille</h4></a>
+                    <img src="{{ asset('media/logoInfirmier.png') }}" alt="logoInfirmier">
+                    <a href="{{ path('app_register_infirmier') }}"><h4>Infirmier</h4></a>
                 </div>
+
                 <div class="container-inner">
                     <img src="{{ asset('media/logoPersAgé.png') }}" alt="logoPersAgé">
                     <a href="{{ path('app_register_resident') }}"><h4>Résident</h4></a>
                 </div>
+                
+                <div class="container-inner">
+                    <img src="{{ asset('media/logoMemFamille.png') }}" alt="logoMemFamille">
+                    <a href="{{ path('app_register_mFamille') }}"><h4>Membre de famille</h4></a>
+                </div>
+                
+                
+
             </div>
         </div>
     </div>

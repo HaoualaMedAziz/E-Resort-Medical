@@ -17,12 +17,20 @@ class Resident extends User
     #[ORM\OneToOne(mappedBy: 'resident', cascade: ['persist', 'remove'])]
     private ?MembreFamille $membreFamille = null;
 
-    #[ORM\OneToMany(targetEntity: Observation::class, mappedBy: 'resident')]
+    #[ORM\OneToMany(targetEntity: Observation::class, mappedBy: 'resident', cascade: ['persist', 'remove'])]
     private Collection $observations;
+
+    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'resident')]
+    private Collection $agenda;
+
+    #[ORM\OneToOne(mappedBy: 'resident', cascade: ['persist', 'remove'])]
+    private ?DossierMedical $dossiermedical = null;
+
 
     public function __construct()
     {
         $this->observations = new ArrayCollection();
+        $this->agenda = new ArrayCollection();
     }
 
     public function getNbChambre(): ?string
@@ -82,5 +90,37 @@ class Resident extends User
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Evenement>
+     */
+    public function getAgenda(): Collection
+    {
+        return $this->agenda;
+    }
+
+    public function addAgenda(Evenement $agenda): static
+    {
+        if (!$this->agenda->contains($agenda)) {
+            $this->agenda->add($agenda);
+            $agenda->addResident($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgenda(Evenement $agenda): static
+    {
+        if ($this->agenda->removeElement($agenda)) {
+            $agenda->removeResident($this);
+        }
+
+        return $this;
+    }
+
+    public function getdossiermedical(): ?Dossiermedical
+    {
+        return $this->dossiermedical;
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Resident;
+use App\Entity\Evenement;
+use App\Form\EvenementType;
+use App\Form\AgendaType;
 use App\Form\ResidentType;
 use App\Repository\ResidentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -78,4 +81,71 @@ class ResidentController extends AbstractController
 
         return $this->redirectToRoute('app_resident_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    // les evenements d'un résident
+
+    #[Route('/{id}/evenements', name: 'app_evenements_resident', methods: ['GET'])]
+    public function evenementsResident(Resident $resident): Response
+    {
+        // Récupérer la collection d'événements associés au résident
+        $evenements = $resident->getAgenda();
+        // Vous pouvez également utiliser le repository pour obtenir les événements si nécessaire
+        // $evenements = $evenementRepository->findByResident($resident);
+        return $this->render('resident/resident_evenements.html.twig', [
+            'resident' => $resident,
+            'evenements' => $evenements,
+        ]);
+    }
+
+    // le dossier médical d'un résident
+
+    #[Route('/{id}/dossiermedical', name: 'app_dossier_medical_resident', methods: ['GET'])]
+    public function dossmedResident(Resident $resident): Response
+    {
+        $dossiermedical= $resident->getdossiermedical();
+        return $this->render('resident/resident_dossiermedical.html.twig', [
+            'resident' => $resident,
+            'dossier_medical' => $dossiermedical,
+        ]);
+    }
+    
+    //fonction d'ajout d'un evenement dans l'agenda 
+
+    #[Route('/{id}/add-evenement', name: 'app_resident_add_evenement', methods: ['GET', 'POST'])]
+public function addEvenement(Request $request, Resident $resident, EntityManagerInterface $entityManager): Response
+{
+    $evenement = new Evenement();
+    $form = $this->createForm(AgendaType::class, $evenement);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Associer l'événement au résident
+        $resident->addAgenda($evenement);
+        
+        $entityManager->persist($evenement);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_evenements_resident', ['id' => $resident->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->render('resident/add_evenement.html.twig', [
+        'resident' => $resident,
+        'form' => $form->createView(),
+    ]);
+}
+    // Modification de l'agenda
+
+#[Route('/{id}/observations', name: 'app_observations_resident', methods: ['GET'])]
+    public function observationsResident(Resident $resident): Response
+    {
+        $observations = $resident->getObservations();
+        return $this->render('resident/resident_observations.html.twig', [
+            'resident' => $resident,
+            'observations' => $observations,
+        ]);
+    }    
+
+
+  
+
 }

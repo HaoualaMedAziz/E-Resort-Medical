@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visite index{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->          
+         <h1 class="mt-4 mb-4">Liste des visites</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered " 
+            style="background:#D6FCFC">
+   
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Membre de famille</th>
+                <th>Résident</th>
+                <th>DateVisite</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visite in visites %}
+            <tr>
+                {#<td>{{ visite.id }}</td>#}
+                <td>{{ visite.membreFamille }}</td>
+                <td>{{ visite.membreFamille.resident }}</td>
+                <td>{{ visite.dateVisite ? visite.dateVisite|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ visite.description }}</td>
+                <td>
+                    <a href="{{ path('app_visite_show', {'id': visite.id}) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('app_visite_edit', {'id': visite.id}) }}" class="btn btn-info">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_visite_new') }}" class="btn btn-success btn-lg mt-3 ml-3 d-inline-block">Ajouter une visite</a>
+{% endblock %}

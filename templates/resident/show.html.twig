@@ -3,6 +3,7 @@
 {% block title %}Resident{% endblock %}
 
 {% block body %}
+
     <h1>Resident</h1>
 
     <table class="table">
@@ -50,6 +51,20 @@
             <tr>
                 <th>NbChambre</th>
                 <td>{{ resident.nbChambre }}</td>
+            </tr>
+            <tr>
+                <th>Agenda</th>
+                {# affichage de l'agenda#}
+                                <td> {% if resident.agenda is empty %}
+                                      Aucun agenda
+                                     {% else %}
+                                     {% for agenda in resident.agenda %}
+                                     {{ agenda.typeEvenement }} : {{ agenda.description }}
+                                     {# Ajoutez d'autres propriétés de l'agenda que vous souhaitez afficher #}
+                                     {% if not loop.last %}| {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                                </td>
             </tr>
         </tbody>
     </table>

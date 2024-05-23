@@ -1,0 +1,336 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DossierMedical{% endblock %}
+
+{% block body %}
+    <h1>DossierMedical</h1>
+
+    <table class="table table-bordered" 
+            style="background:#D6FCFC">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ dossier_medical.id }}</td>
+            </tr>
+            <tr>
+                <th>Taille</th>
+                <td>{{ dossier_medical.taille }}</td>
+            </tr>
+            <tr>
+                <th>Poids</th>
+                <td>{{ dossier_medical.poids }}</td>
+            </tr>
+            <tr>
+                <th>MaladiesAnciennes</th>
+                <td>{{ dossier_medical.maladiesAnciennes }}</td>
+            </tr>
+            <tr>
+                <th>OperationsAnciennes</th>
+                <td>{{ dossier_medical.operationsAnciennes }}</td>
+            </tr>
+            <tr>
+                <th>Allergies</th>
+                <td>{{ dossier_medical.allergies }}</td>
+            </tr>
+            <tr>
+                <th>MaladiesActuelles</th>
+                <td>{{ dossier_medical.maladiesActuelles }}</td>
+            </tr>
+            <tr>
+                <th>TraitementEnCours</th>
+                <td>{{ dossier_medical.traitementEnCours }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionPathologies</th>
+                <td>{{ dossier_medical.DescriptionPathologies }}</td>
+            </tr>
+            <tr>
+                <th>HospitalisationRecente</th>
+                <td>{{ dossier_medical.hospitalisationRecente ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CauseHospitalisationRecente</th>
+                <td>{{ dossier_medical.causeHospitalisationRecente }}</td>
+            </tr>
+            <tr>
+                <th>DureeHospitalisationRecente</th>
+                <td>{{ dossier_medical.dureeHospitalisationRecente }}</td>
+            </tr>
+            <tr>
+                <th>SortieHospitalisationRecente</th>
+                <td>{{ dossier_medical.sortieHospitalisationRecente }}</td>
+            </tr>
+            <tr>
+                <th>ConduiteArisque</th>
+                <td>{{ dossier_medical.conduiteArisque ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Alcool</th>
+                <td>{{ dossier_medical.alcool ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Tabac</th>
+                <td>{{ dossier_medical.tabac ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>EnCoursDeSevrage</th>
+                <td>{{ dossier_medical.enCoursDeSevrage ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PortageDeBacterieMultiresistante</th>
+                <td>{{ dossier_medical.portageDeBacterieMultiresistante ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DeficiencesSensorielles</th>
+                <td>{{ dossier_medical.deficiencesSensorielles ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Boolean</th>
+                <td>{{ dossier_medical.boolean ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Auditive</th>
+                <td>{{ dossier_medical.auditive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Gustative</th>
+                <td>{{ dossier_medical.gustative ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Olfactive</th>
+                <td>{{ dossier_medical.olfactive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Vestibulaire</th>
+                <td>{{ dossier_medical.vestibulaire ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Tactile</th>
+                <td>{{ dossier_medical.tactile ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IdeesDelirantes</th>
+                <td>{{ dossier_medical.ideesDelirantes ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Hallucinations</th>
+                <td>{{ dossier_medical.hallucinations ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AgitationsAgressiviteCris</th>
+                <td>{{ dossier_medical.agitationsAgressiviteCris ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Depression</th>
+                <td>{{ dossier_medical.depression ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Anxiete</th>
+                <td>{{ dossier_medical.anxiete ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Apathie</th>
+                <td>{{ dossier_medical.apathie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Desinhibition</th>
+                <td>{{ dossier_medical.desinhibition ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TroubleDuSommeil</th>
+                <td>{{ dossier_medical.troubleDuSommeil ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ComportementsMoteursAberrants</th>
+                <td>{{ dossier_medical.comportementsMoteursAberrants ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Oxygenotherapie</th>
+                <td>{{ dossier_medical.oxygenotherapie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SondesAlimentaion</th>
+                <td>{{ dossier_medical.sondesAlimentaion ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SondesTracheotomie</th>
+                <td>{{ dossier_medical.sondesTracheotomie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SondesUrinaire</th>
+                <td>{{ dossier_medical.sondesUrinaire ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Gastronomie</th>
+                <td>{{ dossier_medical.gastronomie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Colostomie</th>
+                <td>{{ dossier_medical.colostomie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FauteuilRoulant</th>
+                <td>{{ dossier_medical.fauteuilRoulant ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>LitMedicalise</th>
+                <td>{{ dossier_medical.litMedicalise ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>MatelasAntiEscarres</th>
+                <td>{{ dossier_medical.matelasAntiEscarres ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Deambulateur</th>
+                <td>{{ dossier_medical.deambulateur ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Ureterostomie</th>
+                <td>{{ dossier_medical.ureterostomie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AppareillageVentilatoire</th>
+                <td>{{ dossier_medical.appareillageVentilatoire ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Pompe</th>
+                <td>{{ dossier_medical.pompe ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ChambreImplantable</th>
+                <td>{{ dossier_medical.chambreImplantable ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DialysePeritoneale</th>
+                <td>{{ dossier_medical.dialysePeritoneale ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Orthese</th>
+                <td>{{ dossier_medical.orthese ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Prothese</th>
+                <td>{{ dossier_medical.prothese ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PaceMaker</th>
+                <td>{{ dossier_medical.paceMaker ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DeplacementInterieur</th>
+                <td>{{ dossier_medical.deplacementInterieur }}</td>
+            </tr>
+            <tr>
+                <th>DeplacementExterieur</th>
+                <td>{{ dossier_medical.deplacementExterieur }}</td>
+            </tr>
+            <tr>
+                <th>ToiletteHaut</th>
+                <td>{{ dossier_medical.toiletteHaut }}</td>
+            </tr>
+            <tr>
+                <th>ToiletteBas</th>
+                <td>{{ dossier_medical.toiletteBas }}</td>
+            </tr>
+            <tr>
+                <th>EliminationUrinaire</th>
+                <td>{{ dossier_medical.eliminationUrinaire }}</td>
+            </tr>
+            <tr>
+                <th>EliminationFecale</th>
+                <td>{{ dossier_medical.eliminationFecale }}</td>
+            </tr>
+            <tr>
+                <th>HabillageHaut</th>
+                <td>{{ dossier_medical.habillageHaut }}</td>
+            </tr>
+            <tr>
+                <th>HabillageMoyen</th>
+                <td>{{ dossier_medical.habillageMoyen }}</td>
+            </tr>
+            <tr>
+                <th>HabillageBas</th>
+                <td>{{ dossier_medical.habillageBas }}</td>
+            </tr>
+            <tr>
+                <th>AlimentationSeServire</th>
+                <td>{{ dossier_medical.alimentationSeServire }}</td>
+            </tr>
+            <tr>
+                <th>AlimentationManger</th>
+                <td>{{ dossier_medical.alimentationManger }}</td>
+            </tr>
+            <tr>
+                <th>OrientationTemps</th>
+                <td>{{ dossier_medical.orientationTemps }}</td>
+            </tr>
+            <tr>
+                <th>OrientationEspace</th>
+                <td>{{ dossier_medical.orientationEspace }}</td>
+            </tr>
+            <tr>
+                <th>CommunicationPourAlerter</th>
+                <td>{{ dossier_medical.communicationPourAlerter }}</td>
+            </tr>
+            <tr>
+                <th>Coherence</th>
+                <td>{{ dossier_medical.coherence }}</td>
+            </tr>
+            <tr>
+                <th>Reeducation</th>
+                <td>{{ dossier_medical.reeducation ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Kinesitherapie</th>
+                <td>{{ dossier_medical.kinesitherapie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Orthophonie</th>
+                <td>{{ dossier_medical.orthophonie ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AutreReeducation</th>
+                <td>{{ dossier_medical.autreReeducation }}</td>
+            </tr>
+            <tr>
+                <th>RisqueDeChute</th>
+                <td>{{ dossier_medical.risqueDeChute ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>RisqueDeFausseRoute</th>
+                <td>{{ dossier_medical.risqueDeFausseRoute ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SoinsPalliatifs</th>
+                <td>{{ dossier_medical.soinsPalliatifs ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PancementsOuSoisCutanes</th>
+                <td>{{ dossier_medical.pancementsOuSoisCutanes ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NomMedcin</th>
+                <td>{{ dossier_medical.nomMedcin }}</td>
+            </tr>
+            <tr>
+                <th>PrenomMedcin</th>
+                <td>{{ dossier_medical.prenomMedcin }}</td>
+            </tr>
+            <tr>
+                <th>AdresseMedcin</th>
+                <td>{{ dossier_medical.adresseMedcin }}</td>
+            </tr>
+            <tr>
+                <th>TelephoneMedcin</th>
+                <td>{{ dossier_medical.telephoneMedcin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dossier_medical_edit', {'id': dossier_medical.id}) }}" class="btn btn-success mt-2">Modifier</a>
+
+    <a href="{{ path('app_dossier_medical_index') }}" class="btn btn-secondary mt-2">Retour à la liste</a>
+
+
+    {{ include('dossier_medical/_delete_form.html.twig') }}
+{% endblock %}

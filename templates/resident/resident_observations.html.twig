@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Agenda du résident {{ resident.firstName }} {{ resident.lastName }}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Style pour le tableau */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style pour le message lorsque aucun événement n'est trouvé */
+        .no-events-message {
+            margin-top: 20px;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Liste d'observations du résident {{ resident.firstName }} {{ resident.lastName }}</h1>
+
+    {% if observations is empty %}
+        <p>Aucun événement trouvé pour ce résident.</p>
+    {% else %}
+
+{% if app.user.roles is defined and 'INFIRMIER' in app.user.roles %}
+    
+    <a href="{{ path('app_resident_add_evenement', {'id': resident.id}) }}"
+    class="btn btn-success btn-lg">
+    Ajouter une observation
+    </a>
+ {% endif %}   
+    <table class="table table-bordered mt-4 " 
+        style="background:#D6FCFC">
+    <thead>
+        <tr> 
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for observation in observations %}
+            <tr>
+                <td>{{ observation.description }}</td>
+                <td>
+                <span >{{ observation.createdAt|date('Y-m-d') }}</span> 
+                <span style="color: red">{{ observation.createdAt|date(' H:i') }}</span> 
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    {% endif %}
+{% endblock %}

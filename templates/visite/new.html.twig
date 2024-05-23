@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Visite{% endblock %}
+
+{% block body %}
+    <h1>Create new Visite</h1>
+
+    {{ include('visite/_form.html.twig') }}
+    {% if app.user is defined and app.user %}
+    {% if 'INFIRMIER' in app.user.roles %}
+        <a href="{{ path('app_visite_index') }}">back to list</a>
+    {% endif %}
+    {% endif %}
+
+{% endblock %}

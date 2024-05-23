@@ -8,7 +8,7 @@ use DateTimeImmutable;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 class ObservationCrudController extends AbstractCrudController
@@ -23,7 +23,7 @@ class ObservationCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('resident'),
-            TextEditorField::new('description'),
+            TextareaField::new('description'),
             DateTimeField::new('createdAt'),
 
         ];

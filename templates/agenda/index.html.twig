@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agendas{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #46599C;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            align-items: center;
+        }
+
+        .user-logo {
+            width: 30px; /* Ajustez la taille du logo selon vos besoins */
+            height: auto;
+            margin-right: 10px;
+        }
+        .top-center {
+          position: fixed;
+          top: 20px; /* Adjust the distance from the top as needed */
+          left: 10%;
+          transform: translateX(-50%);
+          color: #46599C;
+          text-align: center;
+          padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->          
+         <h1 class="mt-4 mb-4">Liste des agendas</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered " 
+            style="background:#D6FCFC"> <!-- Ajout de la classe table-bordered pour ajouter des bordures et table-dark pour un thème sombre -->
+                <thead >
+                    <tr>     
+                        <th scope="col">Full Name</th>
+                        <th scope="col">NbChambre</th>
+                        <th scope="col">Agenda</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% if residents is empty %}
+                        <tr>
+                            <td colspan="12">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% else %}
+                        {% for resident in residents %}
+                            <tr>
+                                <td>{{ resident.firstName }}{{ resident.lastName }}</td>
+                                <td>{{ resident.nbChambre }}</td>
+                                <td>
+                                <a href="{{ path('app_evenements_resident', {'id': resident.id}) }}" class="btn">
+                                <img src="{{ asset('images/calendrierIcon.jpg') }}" alt="Voir agenda" width="50" height="50" style="border-radius:70%">
+                                </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+               
+            </table>
+        </div>
+
+    </div>  
+{% endblock %}

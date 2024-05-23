@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Infirmier;
 use App\Entity\MembreFamille;
 use App\Entity\Resident;
 use App\Form\RegistrationResidentFormType;
 use App\Form\RegistrationMFamilleFormType;
-
+use App\Form\RegistrationInfirmierFormType;
 use App\Security\ResidentAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,7 +76,41 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register_mFamille.html.twig', [
-            'registrationResidentForm' => $form,
+            'registrationMFamilleForm' => $form,
+        ]);
+    }
+
+
+
+                                        //Register Infirmiers
+
+        
+        #[Route('/register_infirmier', name: 'app_register_infirmier')]
+    public function registerInfirlier(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    {
+        $infirmier = new Infirmier();
+        $form = $this->createForm(RegistrationInfirmierFormType::class, $infirmier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $infirmier->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $infirmier,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($infirmier);
+            $entityManager->flush();
+
+            // do anything else you need here, like send an email
+
+            return $security->login($infirmier, ResidentAuthenticator::class, 'main');
+        }
+
+        return $this->render('registration/register_infirmier.html.twig', [
+            'registrationInfirmierForm' => $form,
         ]);
     }
 

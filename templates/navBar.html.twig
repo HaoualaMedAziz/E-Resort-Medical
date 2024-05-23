@@ -1,0 +1,98 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_home_infirmier') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;display: flex; align-items: center;">
+        <img src="{{ asset('images/Home_icon_blue-1.png') }}" alt="Nom de l'image" style="width: 20px; height: 20px; margin-right: 0px;">
+        Home 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_resident_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Résidents 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_observation_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Observations 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_agenda') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Agendas 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_evenement_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Evénements
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_type_evenement_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Type d'évenements 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_membre_famille_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Les membres de famille 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_visite_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Les visites 
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="margin-right: 10px;">
+        <a class="nav-link" href="{{ path('app_dossier_medical_index') }}" 
+        style="color: #46599C; font-size: 20px; background-color: rgb(156, 245, 245);border-radius: 10px;">
+        Les dossiers médicaux 
+        <span class="sr-only">(current)</span></a>
+      </li>
+      
+
+    {#  
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" 
+        href="#" id="navbarDropdown" 
+        role="button" 
+        data-toggle="dropdown" 
+        aria-haspopup="true" 
+        aria-expanded="false"
+        style="color: #46599C; font-size: 20px;">
+          Dropdown
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      
+    </li> 
+    #}
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav> 

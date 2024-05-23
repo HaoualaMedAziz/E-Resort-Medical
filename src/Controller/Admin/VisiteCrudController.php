@@ -6,7 +6,7 @@ use App\Entity\Visite;
 use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
@@ -24,7 +24,7 @@ class VisiteCrudController extends AbstractCrudController
         return [
             
             DateTimeField::new('dateVisite'),
-            TextEditorField::new('description'),
+            TextareaField::new('description'),
             AssociationField::new('membreFamille'),
 
 

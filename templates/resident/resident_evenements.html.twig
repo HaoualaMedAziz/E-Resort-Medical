@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Agenda du résident {{ resident.firstName }} {{ resident.lastName }}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Style pour le tableau */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style pour le message lorsque aucun événement n'est trouvé */
+        .no-events-message {
+            margin-top: 20px;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Agenda du résident {{ resident.firstName }} {{ resident.lastName }}</h1>
+
+    {% if evenements is empty %}
+        <p>Aucun événement trouvé pour ce résident.</p>
+    {% else %}
+
+{% if app.user.roles is defined and 'INFIRMIER' in app.user.roles %}
+    
+    <a href="{{ path('app_resident_add_evenement', {'id': resident.id}) }}"
+    class="btn btn-success btn-lg">
+    Ajouter un événement
+    </a>
+ {% endif %}   
+    <table class="table table-bordered mt-4 " 
+        style="background:#D6FCFC">
+    <thead>
+        <tr>
+            <th>Type d'événement</th> 
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.typeEvenement }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>
+                <span >{{ evenement.dateEvenement|date('Y-m-d') }}</span> <!-- Partie de la date en bleu -->
+                <span style="color: red">{{ evenement.dateEvenement|date(' H:i') }}</span> <!-- Partie de l'heure en rouge -->
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    {% endif %}
+{% endblock %}

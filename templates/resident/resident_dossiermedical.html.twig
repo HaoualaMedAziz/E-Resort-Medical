@@ -1,0 +1,521 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Dossier medical de {{ resident.firstName }} {{ resident.lastName }}
+{% endblock %}
+
+
+{% block body %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+    }
+
+    .container h6, .container td {
+        margin: 0; /* Supprime les marges par défaut */
+        padding: 5px 10px; /* Ajoute un peu d'espace autour des éléments */
+    }
+
+    .container h6 {
+        font-weight: bold;
+        color:#4E76B1; /* Met en gras les titres */
+    }
+    .container td{
+        text-color:#4E76B1;
+    }
+
+
+
+    .container2 {
+            display: flex;
+        }
+
+        .column {
+            width: 50%;
+            padding: 0 10px;
+        }
+
+        /* Additional styles for tables */
+        table {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+
+
+
+
+
+
+</style>
+ <h1 style="text-align: center; background-color:#4E76B1;color:#FFFFFF">Dossier Médical</h1>
+{% if dossier_medical is empty %}
+        <h1 style="text-align:center; color:red;">Aucun dossier médical trouvé pour ce résident.</h1>
+    {% else %}
+            <div class="container" style="text-align: center;">
+                <h6>Résident :</h6>  <h6>{{ resident.firstName }} {{ resident.lastName }} / </h6>
+                <h6 >Num dossier :</h6>  <h6>{{ dossier_medical.id }} / </h6>
+                <h6 >Chambre :</h6>  <h6>{{ resident.nbChambre }} / </h6>
+                <h6 >Email :</h6>  <h6>{{ resident.email }} /</h6>
+                <h6 >Téléphone :</h6>  <h6>{{ resident.telephone }} </h6>
+            </div>
+            <div style="align-items: left; display: flex;">
+                <h5 style="margin-right: 10px;">Taille : {{ dossier_medical.taille }} </h5>
+                <h5>Poids : {{ dossier_medical.poids }}</h5>
+            </div>
+
+<div class="container2">
+
+            <div class="column" style="width:30%">
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">ANTECEDENTS MEDICAUX ET<br> CHIRURGICAUX</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>Maladies Anciennes : :</h6>
+                <P style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.maladiesAnciennes }}</P>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Operations Anciennes : :</h6>
+                <P style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.operationsAnciennes }}</P>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Allergies : :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.allergies }}</p>
+            </div>
+            </div>
+            </tbody>
+            </table>
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">PATHOLOGIES</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>MaladiesActuelles :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.maladiesActuelles }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>TraitementEnCours :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.traitementEnCours }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>DescriptionPah6ologies :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.DescriptionPathologies }}</p>
+            </div>
+            </tbody>
+            </table>
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">HOSPITALISATION RECENTE</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>Hospitalisation Récente :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.hospitalisationRecente ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Cause  :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.causeHospitalisationRecente }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Durée :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.dureeHospitalisationRecente }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Sortie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.sortieHospitalisationRecente }}</p>
+            </div>
+            </tbody>
+            </table>
+
+            
+
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">CONDUITE A RISQUE</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>ConduiteArisque :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.conduiteArisque ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Alcool :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.alcool ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Tabac :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.tabac ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>EnCoursDeSevrage :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.enCoursDeSevrage ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">BACTERIE MULTIRESISTANTE</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>Portage de Bacterie Multiresistante :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.portageDeBacterieMultiresistante ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">DEFICIENCES SENSORIELLES</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>DeficiencesSensorielles :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.deficiencesSensorielles ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Boolean :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.boolean ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Auditive :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.auditive ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Gustative :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.gustative ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Olfactive :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.olfactive ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Vestibulaire :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.vestibulaire ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Tactile :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.tactile ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">SYMPTOMES PSYCHO-COMPORTEMENTAUX</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>IdeesDelirantes :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.ideesDelirantes ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Hallucinations :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.hallucinations ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AgitationsAgressiviteCris :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.agitationsAgressiviteCris ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Depression :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.depression ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Anxiete :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.anxiete ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Apathie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.apathie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Desinhibition :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.desinhibition ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>TroubleDuSommeil :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.troubleDuSommeil ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>ComportementsMoteursAberrants :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.comportementsMoteursAberrants ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+            
+
+</div>
+<div class="column" style="width:30%">
+
+
+    
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">SOINS TECHNIQUES</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>Oxygenotherapie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.oxygenotherapie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>SondesAlimentaion :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.sondesAlimentaion ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>SondesTracheotomie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.sondesTracheotomie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>SondesUrinaire :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.sondesUrinaire ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Gastronomie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.gastronomie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Colostomie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.colostomie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>FauteuilRoulant :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.fauteuilRoulant ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>LitMedicalise :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.litMedicalise ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>MatelasAntiEscarres :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.matelasAntiEscarres ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Deambulateur :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.deambulateur ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Ureterostomie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.ureterostomie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AppareillageVentilatoire :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.appareillageVentilatoire ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Pompe :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.pompe ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>ChambreImplantable :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.chambreImplantable ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>DialysePeritoneale :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.dialysePeritoneale ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">APPAREILLAGE</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>Orthése :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.orthese ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Prothése :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.prothese ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>PaceMaker :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.paceMaker ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">DONNEES SUR L’AUTONOMIE</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>DeplacementInterieur :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.deplacementInterieur }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>DeplacementExterieur :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.deplacementExterieur }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>ToiletteHaut :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.toiletteHaut }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>ToiletteBas :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.toiletteBas }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>EliminationUrinaire :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.eliminationUrinaire }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>EliminationFecale :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.eliminationFecale }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>HabillageHaut :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.habillageHaut }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>HabillageMoyen :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.habillageMoyen }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>HabillageBas :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.habillageBas }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AlimentationSeServire :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.alimentationSeServire }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AlimentationManger :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.alimentationManger }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>OrientationTemps :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.orientationTemps }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>OrientationEspace :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.orientationEspace }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>CommunicationPourAlerter :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.communicationPourAlerter }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Coherence :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.coherence }}</p>
+            </div>
+            </tbody>
+            </table>
+
+</div>
+
+<div class="column" style="width:30%">
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">RÉÉDUCATION</h4>
+            <div style=" background-color:#D6FCFC">   
+            <div style="margin-left:5px">
+                <h6>Reeducation :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.reeducation ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Kinesih6erapie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.kinesitherapie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>Orh6ophonie :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.orthophonie ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AutreReeducation :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.autreReeducation }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>RisqueDeChute :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.risqueDeChute ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>RisqueDeFausseRoute :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.risqueDeFausseRoute ? 'Yes' : 'No' }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>SoinsPalliatifs :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.soinsPalliatifs ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">PANCEMENTS</h4>
+            <div style=" background-color:#D6FCFC"> 
+            <div style="margin-left:5px">
+                <h6>PancementsOuSoisCutanes :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.pancementsOuSoisCutanes ? 'Yes' : 'No' }}</p>
+            </div>
+            </tbody>
+            </table>
+
+
+            <table class="table table-bordered" 
+            style="background:#D6FCFC">
+            <tbody>
+            <h4 style="font-weight: bold;">MEDECIN TRAITANT</h4>
+            <div style=" background-color:#D6FCFC">
+            <div style="margin-left:5px">
+                <h6>NomMedcin :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.nomMedcin }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>PrenomMedcin :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.prenomMedcin }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>AdresseMedcin :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.adresseMedcin }}</p>
+            </div>
+            <div style="margin-left:5px">
+                <h6>TelephoneMedcin :</h6>
+                <p style="background-color:#32717E;width:18%;height:50px">{{ dossier_medical.telephoneMedcin }}</p>
+            </div>
+            </tbody>
+            </table>
+</div> 
+
+</div>
+
+
+{% endif %} 
+
+
+{% endblock %}

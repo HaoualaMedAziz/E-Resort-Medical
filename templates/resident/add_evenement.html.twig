@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Ajouter un événement pour {{ resident.firstName }} {{ resident.lastName }}
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un événement pour {{ resident.firstName }} {{ resident.lastName }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div>
+        {{ form_label(form.typeEvenement, 'Type d\'événement') }}
+        {{ form_widget(form.typeEvenement) }}
+        {{ form_errors(form.typeEvenement) }}
+    </div>
+
+    <div>
+        {{ form_label(form.dateEvenement, 'Date de l\'événement') }}
+        {{ form_widget(form.dateEvenement) }}
+        {{ form_errors(form.dateEvenement) }}
+    </div>
+
+    <div>
+        {{ form_label(form.description, 'Description de l\'événement') }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <button type="submit">Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}

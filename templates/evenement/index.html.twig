@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->          
+         <h1 class="mt-4 mb-4">Liste des évenements</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered " 
+            style="background:#D6FCFC">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>type</th>
+                <th>DateEvenement</th>
+                <th>Description</th>
+                <th>Résidents associés</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.id }}</td>
+                <td>{{ evenement.typeEvenement }}</td>
+                <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>
+                    {% for resident in evenement.resident %}
+                        {{ resident.firstName }} {{ resident.lastName }}{% if not loop.last %}, {% endif %}
+                    {% else %}
+                        Aucun résident associé
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}"  class="btn btn-primary">Voir</a>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}"  class="btn btn-info">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun évènement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_new') }}" class="btn btn-success btn-lg mt-3 ml-3 d-inline-block">Ajouter un évènement</a>
+{% endblock %}

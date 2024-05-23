@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeEvenement index{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->          
+         <h1>Liste des types d'évenements</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered " 
+            style="background:#D6FCFC">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_evenement in type_evenements %}
+            <tr>
+                <td>{{ type_evenement.id }}</td>
+                <td>{{ type_evenement.titre }}</td>
+                <td>
+                    <a href="{{ path('app_type_evenement_show', {'id': type_evenement.id}) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('app_type_evenement_edit', {'id': type_evenement.id}) }}" class="btn btn-info">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun type d'évènement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_evenement_new') }}" class="btn btn-success btn-lg mt-3 ml-3 d-inline-block">Ajouter un type d'évènement</a>
+{% endblock %}

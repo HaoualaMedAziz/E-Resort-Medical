@@ -25,7 +25,6 @@ class RegistrationMFamilleFormType extends AbstractType
             ->add('zipCode')
             ->add('city')
             ->add('email')
-            
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

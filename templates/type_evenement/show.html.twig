@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeEvenement{% endblock %}
+
+{% block body %}
+    <h1>TypeEvenement</h1>
+
+    <table class="table table-bordered " 
+            style="background:#D6FCFC">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ type_evenement.titre }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('app_type_evenement_edit', {'id': type_evenement.id}) }}" class="btn btn-success mt-2">Enregistrer</a> <br>
+
+    <a href="{{ path('app_type_evenement_index') }}" class="btn btn-secondary mt-2">Retour à la liste</a>
+
+
+    {{ include('type_evenement/_delete_form.html.twig') }}
+{% endblock %}

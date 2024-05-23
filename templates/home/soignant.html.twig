@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #46599C;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            align-items: center;
+        }
+
+        .user-logo {
+            width: 30px; /* Ajustez la taille du logo selon vos besoins */
+            height: auto;
+            margin-right: 10px;
+        }
+        .top-center {
+          position: fixed;
+          top: 20px; /* Adjust the distance from the top as needed */
+          left: 11%;
+          transform: translateX(-50%);
+          color: #46599C;
+          text-align: center;
+          padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.user %}
+            <div class="top-right" >
+                <img src="{{ asset('images/logoSoignant.png') }}" alt="Logo Utilisateur" class="user-logo">
+                Vous êtes connecté en tant que {{ app.user.email }}!
+               <a href="{{ path('app_logout') }}" class="logout-link">Déconnexion</a>
+            </div>
+            <h4 class="top-center">Bienvenue {{ app.user.lastName }}</h4>
+        {% else %}
+            <div class="top-right">
+                <img src="{{ asset('images/logoUser.jpg') }}" alt="Logo Utilisateur" class="user-logo">
+                Veuillez vous connecter.
+                <a href="{{ path('app_login') }}" class="login-link">Connexion</a>
+            </div>
+        {% endif %}
+    </div>
+    
+    <a href="{{ path('app_observation_new') }}" class="btn btn-success btn-lg mt-2 mb-3 ml-3">
+    Ajouter une observation
+    </a>
+    <div class="container-fluid"> 
+        <div class="table-responsive">
+            <table class="table table-bordered " 
+            style="background:#D6FCFC"> 
+                <thead >
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Chambre</th>
+                        <th scope="col">Agenda</th>
+                        <th scope="col">Dossier médical</th>
+                        <th scope="col">Observations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if residents is empty %}
+                        <tr>
+                            <td colspan="12">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% else %}
+                        {% for resident in residents %}
+                            <tr>
+                                <td>{{ resident.lastName }}</td>
+                                <td>{{ resident.firstName }}</td>
+                                <td>{{ resident.telephone }}</td>
+                                <td>{{ resident.nbChambre }}</td>
+                                <td>
+                                <a href="{{ path('app_evenements_resident', {'id': resident.id}) }}" class="btn">
+                                <img src="{{ asset('images/calendrierIcon.jpg') }}" alt="Voir agenda" width="50" height="50" style="border-radius:70%">
+                                </a>
+                                </td>
+                                <td>
+                                <a href="{{ path('app_dossier_medical_resident', {'id': resident.id}) }}" class="btn">
+                                <img src="{{ asset('images/logoDossierMedical.png') }}" alt="Voir agenda" width="50" height="50" style="border-radius:70%">
+                                </a>
+                                </td>
+                                <td>
+                                <a href="{{ path('app_observations_resident', {'id': resident.id}) }}" class="btn">
+                                <img src="{{ asset('images/logoObservation.jpg') }}" alt="Voir agenda" width="60" height="50" style="border-radius:70%">
+                                </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>  
+{% endblock %}

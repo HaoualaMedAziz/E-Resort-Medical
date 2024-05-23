@@ -2,42 +2,20 @@
 
 {% block title %}Liste des résidents{% endblock %}
 
-{% block stylesheets %}
-    <style>
-        /* Style personnalisé pour la couleur de fond du tableau */
-        .custom-table {
-            background-color: #4E76B1;
-            font-size: 12px; /* Taille de police plus grande */
-        }
-
-        /* Style personnalisé pour la couleur du texte du tableau */
-        .custom-table th,
-        .custom-table td {
-            color: #ffffff; /* Texte en blanc */
-            vertical-align: middle; /* Alignement vertical au centre */
-            
-             /* Augmentation de la marge intérieure */
-        }
-
-        /* Style pour les boutons */
-        .btn {
-            font-size: 16px; /* Taille de police des boutons */
-        }
-    </style>
-{% endblock %}
-
 {% block body %}
-    <div class="container bg-dark text-light py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->
-        <h1 class="mt-4 mb-4">Liste des résidents</h1>
 
+
+    <div class="container-fluid py-4"> <!-- Ajout de la classe bg-dark pour une couleur foncée et text-light pour un texte clair -->
+    <h1 class="mt-2 mb-2 d-inline-block">Liste des résidents</h1>
         <div class="table-responsive">
-            <table class="table table-bordered table-dark custom-table"> <!-- Ajout de la classe table-bordered pour ajouter des bordures et table-dark pour un thème sombre -->
-                <thead class="thead-dark">
+            <table class="table table-bordered "
+            style="background:#D6FCFC"> <!-- Ajout de la classe table-bordered pour ajouter des bordures et table-dark pour un thème sombre -->
+                <thead >
                     <tr>
-                        <th scope="col">Id</th>
+                        {#<th scope="col">Id</th>#}
                         <th scope="col">Email</th>
-                        <th scope="col">Roles</th>
-                        <th scope="col">Password</th>
+                        {#<th scope="col">Roles</th>#}
+                        {#<th scope="col">Password</th>#}
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Telephone</th>
@@ -47,7 +25,8 @@
                         <th scope="col">NbChambre</th>
                         <th scope="col">Membre de famille</th>
                         <th scope="col">Actions</th>
-                    </tr>
+                        {#<th scope="col">Agenda</th>#}
+                    </tr>  
                 </thead>
                 <tbody>
                     {% if residents is empty %}
@@ -57,10 +36,10 @@
                     {% else %}
                         {% for resident in residents %}
                             <tr>
-                                <td>{{ resident.id }}</td>
+                                {#<td>{{ resident.id }}</td>#}
                                 <td>{{ resident.email }}</td>
-                                <td>{{ resident.roles ? resident.roles|join(', ') : '' }}</td>
-                                <td>{{ resident.password }}</td>
+                                {#<td>{{ resident.roles ? resident.roles|join(', ') : '' }}</td>#}
+                                {# <td>{{ resident.password }}</td>#}
                                 <td>{{ resident.firstName }}</td>
                                 <td>{{ resident.lastName }}</td>
                                 <td>{{ resident.telephone }}</td>
@@ -76,16 +55,27 @@
                                 {% endif %}
 
                                 <td>
-                                    <a href="{{ path('app_resident_show', {'id': resident.id}) }}" class="btn btn-primary ">Afficher</a> <!-- Utilisation de la classe btn-lg pour un bouton plus grand -->
+                                    <a href="{{ path('app_resident_show', {'id': resident.id}) }}" class="btn btn-primary" >Afficher</a> <!-- Utilisation de la classe btn-lg pour un bouton plus grand -->
                                     <a href="{{ path('app_resident_edit', {'id': resident.id}) }}" class="btn btn-info ">Modifier</a>
                                 </td>
+                                        {# affichage de l'agenda #}
+                                {#<td> {% if resident.agenda is empty %}
+                                      Aucun agenda
+                                     {% else %}
+                                     {% for agenda in resident.agenda %}
+                                     {{ agenda.typeEvenement }} : {{ agenda.description }} le {{ agenda.dateEvenement|date('Y-m-d H:i') }}
+                                     {% if not loop.last %}, {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                                </td>
+                                #}
+                                
                             </tr>
                         {% endfor %}
                     {% endif %}
                 </tbody>
             </table>
         </div>
-
-        <a href="{{ path('app_resident_new') }}" class="btn btn-success btn-lg mt-3">Ajouter un nouveau résident</a> <!-- Utilisation de la classe btn-lg pour un bouton plus grand -->
+    <a href="{{ path('app_resident_new') }}" class="btn btn-success btn-lg mt-3 ml-3 d-inline-block">Ajouter un nouveau résident</a> 
     </div>
 {% endblock %}
